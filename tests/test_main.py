@@ -3,6 +3,7 @@ import pytest
 from httpx import AsyncClient, ASGITransport
 from app.main import app
 
+
 @pytest.mark.asyncio
 async def test_flag_happy_path():
     transport = ASGITransport(app=app)
@@ -11,6 +12,7 @@ async def test_flag_happy_path():
         assert resp.status_code == 200
         assert "Canada" in resp.text
         assert "flagcdn.com/ca.svg" in resp.text
+
 
 @pytest.mark.asyncio
 async def test_flag_error_path():

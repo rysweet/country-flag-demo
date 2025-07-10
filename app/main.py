@@ -10,8 +10,11 @@ from typing import Optional
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
 
+
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, q: Optional[str] = Query(None, description="Country name or code")):
+async def index(
+    request: Request, q: Optional[str] = Query(None, description="Country name or code")
+):
     flag: Optional[FlagMeta] = None
     error: Optional[str] = None
     if q:
@@ -21,7 +24,10 @@ async def index(request: Request, q: Optional[str] = Query(None, description="Co
             error = str(e)
         except Exception:
             error = "Unexpected error"
-    return templates.TemplateResponse("index.html", {"request": request, "flag": flag, "error": error})
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "flag": flag, "error": error}
+    )
+
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request, exc):

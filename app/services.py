@@ -3,11 +3,14 @@ from .models import FlagMeta
 from functools import lru_cache
 import asyncio
 
+
 class FlagNotFound(Exception):
     pass
 
+
 # Simple in-memory cache (not persistent, for demo)
 _cache = {}
+
 
 async def get_flag(country: str) -> FlagMeta:
     key = country.lower().strip()
