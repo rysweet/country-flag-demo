@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country Flag Viewer</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Country Flag Viewer</h1>
+    <form hx-get="/" hx-target="#flag" hx-swap="innerHTML">
+        <input type="text" name="q" placeholder="Enter country name or code" required>
+        <button type="submit">Show Flag</button>
+    </form>
+    <div id="flag">
+        {% if flag %}
+            <h2>{{ flag.country }} ({{ flag.code }})</h2>
+            <img src="{{ flag.flag_url }}" alt="Flag of {{ flag.country }}" width="200">
+        {% elif error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
