@@ -1,22 +1,19 @@
-from fastapi import FastAPI, Request, Query
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
-from .services import get_flag, FlagNotFound
-from .models import FlagMeta, ErrorResponse
-from typing import Optional
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.templating import Jinja2Templates
+
+from .models import ErrorResponse, FlagMeta
+from .services import FlagNotFound, get_flag
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
 
 
 @app.get("/", response_class=HTMLResponse)
-async def index(
-    request: Request, q: Optional[str] = Query(None, description="Country name or code")
-):
-    flag: Optional[FlagMeta] = None
-    error: Optional[str] = None
+async def index(request: Request, q: str | None = Query(None, description="Country name or code")):
+    flag: FlagMeta | None = None
+    error: str | None = None
     if q:
         try:
             flag = await get_flag(q)

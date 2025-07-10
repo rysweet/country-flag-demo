@@ -1,7 +1,4 @@
-import httpx
 from .models import FlagMeta
-from functools import lru_cache
-import asyncio
 
 
 class FlagNotFound(Exception):
