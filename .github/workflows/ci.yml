@@ -13,5 +13,7 @@ jobs:
         run: pip install uv
       - name: Install deps
         run: uv pip sync --system requirements.lock
+      - name: Install pre-commit
+        run: pip install pre-commit
       - name: Run pre-commit
         run: pre-commit run --all-files
