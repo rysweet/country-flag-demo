@@ -1,0 +1,3 @@
+# requirements.lock
+# This is a stub lockfile for initial scaffold.
+# To regenerate: uv pip compile -o requirements.lock pyproject.toml
